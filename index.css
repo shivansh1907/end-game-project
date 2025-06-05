@@ -15,6 +15,11 @@ body{
     padding:20px;
     height:100vh;
 }
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
 
 header{
     color:white;
@@ -22,7 +27,8 @@ header{
 }
 header p{
     font-size:0.875rem;
-    max-width:350px
+    max-width:350px;
+    text-align: center;
 }
 header h1{
     font-size: 1.25 rem;
@@ -31,7 +37,9 @@ header h1{
 
 .status{
     text-align: center;
-    background-color: green;
+    /* background-color: green; */
+    width:100%;
+    max-width: 300px;
     padding-top:1px;
     padding-bottom:1px;
     margin-top:30px;
@@ -44,6 +52,16 @@ header h1{
    height:60px;
    margin-block:30px
    
+}
+.status.won{
+    background-color: green;
+    width:100%;
+    max-width: 300px;
+}
+.status.lost{
+    background-color: red;
+    width:100%;
+    max-width: 300px;
 }
 .status p{
     margin:5px
@@ -58,11 +76,14 @@ header h1{
     max-width: 300px;
     margin-top: 25px;
     gap:5px;
+    width:430px;
     
     
 
     flex-wrap: wrap;
     justify-content: center;
+
+    align-items: center;
     margin-bottom: 36px;
 }
 .chips{
@@ -94,9 +115,10 @@ header h1{
     justify-content: center;
     align-items: center;
     background-color: #323232;
+    
 }
 
-.keyboard{
+section.keyboard{
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -104,17 +126,29 @@ header h1{
     max-width: 430.2px;
 }
 
-.key{
+
+
+
+section.keyboard > button{
     height:35px;
     width:35px;
    border-radius: 3px;
-   background-color: #FCAB29;
+  background-color: #FCAB29;
 }
+
+section.keyboard > button.correct{
+    background-color: green;
+}
+section.keyboard > button.wrong{
+    background-color: #EC5D49;
+}
+
+
 
 .new{
 display:flex;
 justify-content: center;
-margin-top: 23px;
+margin-top: 30px;
 color:white;
 
 }
