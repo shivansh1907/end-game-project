@@ -2,15 +2,19 @@
 import { languages } from "./languages"
 import React from "react"
 import clsx from "clsx"
+import genRandomWord from "../utils"
+import { words } from "../words"
 
 
 export default function App() {
   const alphabets="abcdefghijklmnopqrstuvwxyz"
+  const randomWord=genRandomWord();
 
-  const [currword,setcurrword]=React.useState("react")
+  const [currword,setcurrword]=React.useState(randomWord)
   const [guessedletters,setguessedletters]=React.useState([])
 
   // derived values
+   
   const wrongguesscount=
                 guessedletters.filter(letter=>!currword.includes(letter)).length
   
@@ -22,6 +26,9 @@ export default function App() {
     
 
   }
+ 
+
+
   const isgamewin=()=>{
     for(let letter of currword){
     if(!guessedletters.includes(letter)){
@@ -30,7 +37,7 @@ export default function App() {
   }
 return true}
 const isgamewon=isgamewin();
-const isgamelost=wrongguesscount>=languages.length?true:false
+const isgamelost=wrongguesscount>=languages.length-2?true:false
 
 
 const isgameover=isgamewon || isgamelost
@@ -43,7 +50,7 @@ const isgameover=isgamewon || isgamelost
   const langs=languages.map((lang,index)=>{
     const islanguagelost=index<wrongguesscount
     const languageexist=index>=wrongguesscount
-    const classNAmes=clsx({
+    const classNames=clsx({
       chiplost:islanguagelost,
       chipexist:languageexist
     })
@@ -54,7 +61,7 @@ const isgameover=isgamewon || isgamelost
     }
     return(
       <span key={index}
-      className={classNAmes}
+      className={classNames}
       style={styles}>
         {
           lang.name
@@ -93,6 +100,11 @@ const isgameover=isgamewon || isgamelost
     won:isgamewon,
     lost:isgamelost,
   })
+
+  const keyboardClass=clsx("keyboard",{
+    disable:isgameover
+
+  })
   return (
     
   <main>
@@ -130,16 +142,21 @@ const isgameover=isgamewon || isgamelost
     {words}
    </div>
 
-   <section className="keyboard">
+   <section className={keyboardClass}>
     {keyboard}
     
    </section>
-   {isgameover &&
+   
    <section className="new">
-   <button>New Game!</button>
+    {isgameover &&
+   <button onClick={()=>{
+    setcurrword(genRandomWord())
+    setguessedletters([])
+  }}> New Game!</button>
+   }
    </section>
 
-}
+
 
    
 
