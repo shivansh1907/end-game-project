@@ -44,6 +44,8 @@ const isgameover=isgamewon || isgamelost
 
 
 
+
+
  
 
 
@@ -76,8 +78,9 @@ const isgameover=isgamewon || isgamelost
   //functionn to handle click
   
   const words=currword.split("").map((letter,index)=>{
+    const shouldReveal=isgamelost || guessedletters.includes(letter)
     return (
-      <span key ={index} className="letter">{guessedletters.includes(letter)? letter.toUpperCase():" "}</span>
+      <span key ={index} className="letter">{shouldReveal?letter.toUpperCase():""}</span>
     )
   })
 
